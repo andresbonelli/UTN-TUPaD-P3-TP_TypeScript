@@ -1,21 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript & Autenticación</title>
-    <link rel="stylesheet" href="../../../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodStore - Carrito</title>
+  <link rel="stylesheet" href="../../../style.css" />
 </head>
+<body class="store-body">
 
-<body>
-    <div class="container-card">
-        <h1>Hola desde el carrito</h1>
-        <hr>
-        <button id="logoutButton" class="btn-submit">Logout</button>
+  <!-- ── HEADER / NAVBAR ─────────────── -->
+  <header class="navbar">
+    <a href="/src/pages/store/home/home.html" class="navbar-brand">
+      <span class="navbar-brand-icon">🍕</span>
+      <span class="navbar-brand-name">Food Store</span>
+    </a>
+
+    <nav id="navbar-links" class="navbar-links">
+      <a href="/src/pages/store/home/home.html" class="nav-link">Inicio</a>
+      <a href="#" class="nav-link">Mis Pedidos</a>
+      <a href="/src/pages/store/cart/cart.html" class="nav-link nav-link-cart active">
+        🛒 Carrito
+        <span id="cart-badge" class="cart-badge"></span>
+      </a>
+    </nav>
+
+    <div class="navbar-user">
+      <span id="navbar-username" class="navbar-username">Usuario no registrado</span>
+      <button id="logoutButton" class="btn-logout" type="button">Cerrar Sesión</button>
     </div>
-    <script type="module" src="./cart.ts"></script>
-    <script type="module" src="../../../main.ts"></script>
-</body>
+  </header>
 
+  <!-- ── LAYOUT CARRITO ─────────────────────────────────── -->
+  <div class="cart-layout">
+
+    <!-- ── COLUMNA IZQUIERDA: items ──────────────────────── -->
+    <div class="cart-left">
+      <h2 class="products-title">Mi Carrito</h2>
+      <!-- Contenedor de items del carrito  -->
+      <div id="cart-container" class="cart-items"></div>
+    </div>
+
+    <!-- ── COLUMNA DERECHA: resumen ──────────────────────── -->
+    <aside class="cart-summary">
+      <h3 class="cart-summary-title">Resumen del Pedido</h3>
+
+      <div class="cart-summary-rows">
+        <div class="cart-summary-row">
+          <span>Subtotal:</span>
+          <span id="summary-subtotal"></span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Envío:</span>
+          <span id="summary-envio"></span>
+        </div>
+      </div>
+
+      <hr class="cart-summary-divider" />
+
+      <div class="cart-summary-row cart-summary-total">
+        <span>Total:</span>
+        <span id="summary-total"></span>
+      </div>
+
+      <button class="btn-submit" type="button">Proceder al Pago</button>
+      <button id="vaciar-carrito" class="btn-vaciar" type="button">Vaciar Carrito</button>
+    </aside>
+
+  </div>
+
+  <script type="module" src="./cart.ts"></script>
+  <script type="module" src="../../../main.ts"></script>
+  <script type="module" src="../store.ts"></script>
+
+</body>
 </html>

@@ -1,30 +1,6 @@
-import { logout } from "../../../utils/auth";
 import { getCategories, PRODUCTS } from "../../../data/data";
-import type { ICategory, IUser, Product } from "../../../types";
-import { getUSer } from "../../../utils/localStorage";
-
-const buttonLogout = document.getElementById(
-  "logoutButton"
-) as HTMLButtonElement;
-buttonLogout?.addEventListener("click", () => {
-  logout();
-});
-
-// Cargar nombre de usuario al navbar y mostrar link de admin si corresponde
-const navbar = document.getElementById("navbar-links") as HTMLDivElement;
-const userNameElement = document.getElementById("navbar-username") as HTMLSpanElement;
-const usuario: IUser = getUSer() ? JSON.parse(getUSer() as string) : null;
-
-if (usuario) {
-  userNameElement.textContent = usuario.email;
-  if (usuario.role === "admin") {
-    const adminLink = document.createElement("a");
-    adminLink.href = "/src/pages/admin/home/home.html";
-    adminLink.textContent = "Administracion";
-    adminLink.classList.add("nav-link");
-    navbar?.appendChild(adminLink);
-  }
-}
+import type { CartItem, ICategory, Product } from "../../../types";
+import { actualizarContadorCarrito } from "../store";
 
 const searchInput = document.getElementById("search-input") as HTMLInputElement;
 
@@ -104,13 +80,42 @@ const renderizarProductos = (productos: Product[]) => {
           <p class="product-description">${p.descripcion}</p>
           <div class="product-footer">
             <span class="product-price">$${p.precio}</span>
-            <span class="product-badge ${p.disponible ? 'available' : 'unavailable'}">
-              ${p.disponible ? 'Disponible' : 'No disponible'}
-            </span>
+            <button 
+              id="btn-add-${p.id}"
+              class="btn-add-cart" 
+              ${!p.disponible ? 'disabled' : ''}
+            >
+              ${p.disponible ? 'Agregar' : 'Sin stock'}
+            </button>
           </div>
       </div>
     `;
     contenedorProductos.appendChild(article);
+
+    // Agregar funcionalidad al botón de agregar al carrito
+    const btnAdd = document.getElementById(`btn-add-${p.id}`);
+    
+    btnAdd?.addEventListener('click', () => {
+      const cartExistente = localStorage.getItem("cart");
+      let cart: CartItem[] = cartExistente ? JSON.parse(cartExistente) : [];
+      const itemExistente = cart.find(item => item.product.id === p.id);
+
+      if (itemExistente) {
+        itemExistente.quantity += 1;
+      } else {
+        const nuevoItem: CartItem = {
+          product: p,
+          quantity: 1
+        };
+        cart.push(nuevoItem);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      actualizarContadorCarrito();
+
+      alert(`¡Producto "${p.nombre}" agregado al carrito!`);
+    });
   });
 };
 
