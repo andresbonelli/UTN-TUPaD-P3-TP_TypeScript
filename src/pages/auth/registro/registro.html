@@ -4,11 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TypeScript & Autenticación</title>
+    <link rel="stylesheet" href="../../../style.css">
 </head>
 
 <body>
-    <h1>Hola desde el registro</h1>
+    <div class="container-card">
+        <h1 class="titulo">Food Store</h1>
+        <h2 class="subtitulo">Registrarse</h2>
+    
+        <form id="registro">
+          <div class="login-register-form-input">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="info@foodstore.com"
+              required
+            />
+          </div>
+    
+          <div class="login-register-form-input">
+            <label for="password">Contraseña:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Mínimo 4 caracteres"
+              minlength="4"
+              required
+            />
+          </div>
+          <div class="login-register-form-input">
+            <label for="rol">Rol</label>
+            <select name="rol" id="rol" required>
+                <option value="">Seleccione un rol</option>
+                <option value="client">Cliente</option>
+                <option value="admin">Admin</option>
+            </select>
+          </div>
+    
+          <button type="submit" class="btn-submit">Registrarse</button>
+    
+        </form>
+
+        <div id="mensaje"></div>
+    
+        <p class="redirect-link">
+          ¿Ya tenés cuenta? <a href="/src/pages/auth/login/login.html">Inicia sesion acá</a>
+        </p>
+      </div>
+      <script type="module" src="./registro.ts"></script>
+      <script type="module" src="../../../main.ts"></script>
 </body>
 
 </html>

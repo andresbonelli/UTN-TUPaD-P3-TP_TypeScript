@@ -1,30 +1,40 @@
-import type { IUser } from "../../../types/IUser";
-import type { Rol } from "../../../types/Rol";
-import { navigate } from "../../../utils/navigate";
+import { login } from "../../../utils/auth";
 
-const form = document.getElementById("form") as HTMLFormElement;
-const inputEmail = document.getElementById("email") as HTMLInputElement;
-//const inputPassword = document.getElementById("password") as HTMLInputElement;
-const selectRol = document.getElementById("rol") as HTMLSelectElement;
+const form = document.querySelector<HTMLFormElement>("#login");
+const mensaje = document.querySelector<HTMLDivElement>("#mensaje");
+const inputs = form?.querySelectorAll("input");
 
-form.addEventListener("submit", (e: SubmitEvent) => {
+// Limpiar el mensaje de error si el usuario escribe de nuevo
+inputs?.forEach(input => {
+  input.addEventListener("input", () => {
+    if (mensaje) {
+      mensaje.innerHTML = "";
+    }
+  });
+});
+
+
+form?.addEventListener("submit", (e: SubmitEvent) => {
   e.preventDefault();
-  const valueEmail = inputEmail.value;
-  //const valuePassword = inputPassword.value;
-  const valueRol = selectRol.value as Rol;
 
-  if (valueRol === "admin") {
-    navigate("/src/pages/admin/home/home.html");
-  } else if (valueRol === "client") {
-    navigate("/src/pages/client/home/home.html");
+  const formElement = e.currentTarget as HTMLFormElement;
+
+  const formData = new FormData(formElement);
+
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  try {
+    login(email, password);
+  } catch (error) {
+    if (error instanceof Error) {
+      if (mensaje) {
+        mensaje.innerHTML = `<p class="msg-error">${error.message}</p>`;
+      }
+    } else {
+      if (mensaje) {
+        mensaje.innerHTML = `<p class="msg-error">Ocurrió un error inesperado. Inténtalo de nuevo.</p>`;
+      }
+    }
   }
 
-  const user: IUser = {
-    email: valueEmail,
-    role: valueRol,
-    loggedIn: true,
-  };
-
-  const parseUser = JSON.stringify(user);
-  localStorage.setItem("userData", parseUser);
 });

@@ -1,7 +1,5 @@
-import type { Rol } from "./Rol";
+import type { BaseUser } from "./BaseUser";
 
-export interface IUser {
-  email: string;
+export interface IUser extends BaseUser {
   loggedIn: boolean;
-  role: Rol;
 }

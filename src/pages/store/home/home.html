@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Store – Inicio</title>
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+<body class="store-body">
+
+  <!-- ── HEADER / NAVBAR ─────────────────────────────────── -->
+  <header class="navbar">
+    <a href="/src/pages/store/home/home.html" class="navbar-brand">
+      <span class="navbar-brand-icon">🍕</span>
+      <span class="navbar-brand-name">Food Store</span>
+    </a>
+
+    <nav id="navbar-links" class="navbar-links">
+      <a href="/src/pages/store/home/home.html" class="nav-link active">Inicio</a>
+      <a href="#" class="nav-link">Mis Pedidos</a>
+      <a href="/src/pages/store/cart/cart.html" class="nav-link nav-link-cart">
+        🛒 Carrito
+        <span class="cart-badge">0</span>
+      </a>
+    </nav>
+
+    <div class="navbar-user">
+      <span id="navbar-username" class="navbar-username">Usuario no registrado</span>
+      <button id="logoutButton" class="btn-logout" type="button">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT PRINCIPAL ────────────────────────────────── -->
+  <div class="store-layout">
+
+    <!-- ── ASIDE: Categorías ─────────────────────────────── -->
+    <aside class="sidebar">
+      <h2 class="sidebar-title">Categorías</h2>
+      <p class="sidebar-subtitle">Filtrá por categoría</p>
+
+      <ul id="category-list" class="category-list">
+        <li id="ver-todos" class="category-item" data-category="all">
+          Todos los productos
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ── MAIN: Productos ───────────────────────────────── -->
+    <main class="store-main">
+
+      <!-- Barra superior: búsqueda + filtros -->
+      <div class="store-toolbar">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Buscar productos..."
+          />
+        </div>
+
+        <div class="toolbar-selects">
+          <select class="store-select">
+            <option value="">Ordenar por</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nombre">Nombre</option>
+          </select>
+
+          <select class="store-select">
+            <option value="">Todos</option>
+            <option value="disponible">Disponible</option>
+            <option value="sin-stock">Sin stock</option>
+          </select>
+        </div>
+      </div>
+      <!-- Título de sección + contador -->
+      <div class="products-header">
+        <h2 class="products-title">Todos los Productos</h2>
+        <span id="products-count" class="products-count"></span>
+      </div>
+      <!-- Grid de cards con productos -->
+      <div id="contenedor-productos" class="products-grid"></div>
+    </main>
+  </div>
+  <script type="module" src="./home.ts"></script>
+  <script type="module" src="../../../main.ts"></script>
+
+</body>
+</html>

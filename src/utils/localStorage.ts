@@ -1,3 +1,4 @@
+import type { StoredUser } from "../types";
 import type { IUser } from "../types/IUser";
 
 export const saveUser = (user: IUser) => {
@@ -9,4 +10,12 @@ export const getUSer = () => {
 };
 export const removeUser = () => {
   localStorage.removeItem("userData");
+};
+
+export function getUsers(): StoredUser[] {
+  return localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users") as string) : [];
+}
+
+export const limpiarLocalStorage = () => {
+  localStorage.clear();
 };

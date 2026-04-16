@@ -4,36 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TypeScript & Autenticación</title>
+    <link rel="stylesheet" href="../../../style.css">
 </head>
 
 <body>
-    <h1> Login</h1>
+    <div class="container-card">
+        <h1 class="titulo">Food Store</h1>
+        <h2 class="subtitulo">Iniciar Sesión</h2>
 
-    <form id="form">
+        <form id="login">
+            <div class="login-register-form-input">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="info@foodstore.com"
+                required
+              />
+            </div>
+      
+            <div class="login-register-form-input">
+              <label for="password">Contraseña:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+      
+            <button type="submit" class="btn-submit">Ingresar</button>
+      
+          </form>
 
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
-        </div>
-        <div>
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
-        </div>
-        <div>
-            <label for="rol">Rol</label>
-            <select name="rol" id="rol">
-                <option value="">Seleccione un rol</option>
-                <option value="client">Cliente</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
+          <div id="mensaje"></div>
 
-        <button type="submit">Ingresar</button>
+          <p class="redirect-link">
+            ¿No tenés cuenta? <a href="/src/pages/auth/registro/registro.html">Registrate acá</a>
+          </p>
+          <br>
+          <br>
+          <p>Cuentas de prueba:</p>
+          <p>Admin: admin@foodstore.com / 1234</p>
+          <p>Cliente: cliente@foodstore.com / 1234</p>
 
     </form>
 
     <script type="module" src="./login.ts"></script>
+    <script type="module" src="../../../main.ts"></script>
 </body>
 
 </html>
