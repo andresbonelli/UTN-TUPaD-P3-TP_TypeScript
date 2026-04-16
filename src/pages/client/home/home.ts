@@ -1,9 +1,0 @@
-import { logout } from "../../../utils/auth";
-import { navigate } from "../../../utils/navigate";
-
-const buttonLogout = document.getElementById(
-  "logoutButton"
-) as HTMLButtonElement;
-buttonLogout?.addEventListener("click", () => {
-  logout();
-});

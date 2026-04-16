@@ -13,7 +13,7 @@ const renderizarCarrito = (cart: CartItem[]) => {
   const cartContainer = document.getElementById("cart-container") as HTMLDivElement;
   if (!cartContainer) return;
 
-  actualizarResumenCompra(cart);
+  actualizarResumen(cart);
   actualizarContadorCarrito();
   
   if (cart.length === 0) {
@@ -81,12 +81,12 @@ const asignarEventosCarrito = () => {
   });
 };
 
-const modificarCantidad = (productId: number, cambio: number) => {
+const modificarCantidad = (productId: number, cantidad: number) => {
   const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
   const item = cart.find(i => i.product.id === productId);
 
   if (item) {
-    item.quantity += cambio;
+    item.quantity += cantidad;
 
     if (item.quantity <= 0) {
       eliminarDelCarrito(productId);
@@ -106,7 +106,7 @@ const eliminarDelCarrito = (productId: number) => {
   renderizarCarrito(nuevoCarrito);
 };
 
-const actualizarResumenCompra = (cart: CartItem[]) => {
+const actualizarResumen = (cart: CartItem[]) => {
   const summarySubtotal = document.getElementById("summary-subtotal");
   const summaryEnvio = document.getElementById("summary-envio");
   const summaryTotal = document.getElementById("summary-total");
@@ -122,6 +122,6 @@ const actualizarResumenCompra = (cart: CartItem[]) => {
   summaryTotal.textContent = `$${total.toLocaleString()}`;
 };
 
-// Carga inicial al entrar a la página cart.html
-const carritoInicial: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-renderizarCarrito(carritoInicial);
+// Carga inicial
+const cartExistente: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
+renderizarCarrito(cartExistente);
