@@ -585,6 +585,32 @@ body.store-body {
   cursor: default;
 }
 
+/* Alerta de contenedor vacío */
+
+.empty-state {
+  width: 100%;
+  padding: 48px 24px;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px var(--color-sombra-card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-state-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-texto);
+}
+
+.empty-state-subtitle {
+  font-size: 0.9rem;
+  color: #999;
+}
+
 
 
 /* ═══════════════════════════════════════════════════════════

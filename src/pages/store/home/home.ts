@@ -67,6 +67,16 @@ const renderizarProductos = (productos: Product[]) => {
   contenedorProductos.innerHTML = "";
   contadorProductos.textContent = `${productos.length} productos`;
 
+  if (productos.length === 0) {
+    contenedorProductos.innerHTML = `
+      <div class="empty-state">
+        <h3 class="empty-state-title">No se encontraron productos</h3>
+        <p class="empty-state-subtitle">Intenta con otra búsqueda o filtro</p>
+      </div>
+    `;
+    return;
+  }
+
   productos.forEach(p => {
     const article = document.createElement('article');
     article.classList.add('product-card');

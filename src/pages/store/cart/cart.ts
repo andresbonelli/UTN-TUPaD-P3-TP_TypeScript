@@ -17,10 +17,13 @@ const renderizarCarrito = (cart: CartItem[]) => {
   actualizarContadorCarrito();
   
   if (cart.length === 0) {
-    cartContainer.innerHTML = `<p class="empty-cart-msg">Tu carrito está vacío.</p>`;
+    cartContainer.innerHTML = `
+      <div class="empty-state">
+        <h3 class="empty-state-title">Carrito de compras vacío</h3>
+        <p class="empty-state-subtitle">Vuelve al inicio para agregar productos</p>
+      </div>`;
     return;
   }
-  
   cartContainer.innerHTML = "";
 
   cart.forEach((item) => {
