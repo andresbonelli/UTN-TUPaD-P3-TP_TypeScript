@@ -16,6 +16,19 @@ export function getUsers(): StoredUser[] {
   return localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users") as string) : [];
 }
 
-export const limpiarLocalStorage = () => {
-  localStorage.clear();
-};
+export function cargarUsuariosDePrueba() {
+  if(!getUsers().length) {
+    localStorage.setItem("users", JSON.stringify([
+          {
+              "email":"admin@foodstore.com",
+              "password":"1234",
+              "role":"admin"
+          },
+          {
+              "email":"cliente@foodstore.com",
+              "password":"1234",
+              "role":"client"
+          }
+    ]));
+  }
+}
