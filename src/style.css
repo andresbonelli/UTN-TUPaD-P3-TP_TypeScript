@@ -863,6 +863,19 @@ body.store-body {
   text-transform: none;
 }
 
+.btn-submit.disabled {
+  background-color: #e0e0e0;
+  color: #888;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+.cart-summary > .warning {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
 /* Botón secundario "Vaciar carrito" */
 .btn-vaciar {
   width: 100%;
