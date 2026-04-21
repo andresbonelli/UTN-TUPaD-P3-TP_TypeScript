@@ -2,6 +2,7 @@ import type { CartItem, Product } from "../../../types";
 import { actualizarContadorCarrito, showToast } from "../store";
 
 const emptyCartButton = document.getElementById("vaciar-carrito") as HTMLButtonElement;
+const summaryContainer = document.getElementById("cart-summary") as HTMLDivElement;
 
 emptyCartButton.addEventListener("click", () => {
   localStorage.removeItem("cart");
@@ -117,6 +118,11 @@ const actualizarResumen = (cart: CartItem[]) => {
   const summaryTotal = document.getElementById("summary-total");
 
   if (!summarySubtotal || !summaryEnvio || !summaryTotal) return;
+
+  if (cart.length === 0) {
+    summaryContainer.style.display = "none";
+    return;
+  }
 
   const subtotal = cart.reduce((acc, i) => acc + i.product.precio * i.quantity, 0);
   const envio = (subtotal > 5000 || subtotal === 0) ? 0 : 500;
