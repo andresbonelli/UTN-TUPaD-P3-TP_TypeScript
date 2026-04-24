@@ -28,6 +28,7 @@ const renderizarCarrito = (cart: CartItem[]) => {
   cartContainer.innerHTML = "";
 
   cart.forEach((item) => {
+    if(!item.product) return;
     const subtotal = item.product.precio * item.quantity;
     
     const article = document.createElement("article");
@@ -87,7 +88,7 @@ const asignarEventosCarrito = () => {
 
 const modificarCantidad = (productId: number, cantidad: number) => {
   const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-  const item = cart.find(i => i.product.id === productId);
+  const item = cart.find(i => i.product?.id === productId);
 
   if (item) {
     item.quantity += cantidad;
@@ -104,8 +105,8 @@ const modificarCantidad = (productId: number, cantidad: number) => {
 
 const eliminarDelCarrito = (productId: number) => {
   const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-  const productoEliminado: Product | undefined = cart.find(i => i.product.id === productId)?.product;
-  const nuevoCarrito = cart.filter(i => i.product.id !== productId);
+  const productoEliminado: Product | undefined = cart.find(i => i.product?.id === productId)?.product;
+  const nuevoCarrito = cart.filter(i => i.product?.id !== productId);
   
   localStorage.setItem("cart", JSON.stringify(nuevoCarrito));
   renderizarCarrito(nuevoCarrito);
@@ -124,7 +125,7 @@ const actualizarResumen = (cart: CartItem[]) => {
     return;
   }
 
-  const subtotal = cart.reduce((acc, i) => acc + i.product.precio * i.quantity, 0);
+  const subtotal = cart.reduce((acc, i) => i.product ? acc + i.product.precio * i.quantity : 0, 0);
   const envio = (subtotal > 5000 || subtotal === 0) ? 0 : 500;
   const total = subtotal + envio;
 

@@ -110,7 +110,7 @@ const renderizarProductos = (productos: Product[]) => {
     btnAdd?.addEventListener('click', () => {
       const cartExistente = localStorage.getItem("cart");
       let cart: CartItem[] = cartExistente ? JSON.parse(cartExistente) : [];
-      const itemExistente = cart.find(item => item.product.id === p.id);
+      const itemExistente = cart.find(item => item.product?.id === p.id);
 
       if (itemExistente) {
         itemExistente.quantity += 1;
